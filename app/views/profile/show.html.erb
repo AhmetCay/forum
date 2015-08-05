@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="#" class="thumbnail" style="height:124px;padding:10px;">
+      <%= image_tag @profile.avatar.url(:thumb) %>
+    </a>
+  </div>
+  <div class="col-md-9">
+    <ul class="list-group">
+      <li class="list-group-item"><%= t('name') %>: <%= @profile.first_name %></li>
+      <li class="list-group-item">Soyisim: <%= @profile.last_name %></li>
+      <li class="list-group-item">Telefon: <%= @profile.phone %></li>
+    </ul>
+    <%= link_to "Profilimi Düzenle", edit_profile_path ,class: "btn btn-default" if current_user == @profile.user %>
+
+	<%= link_to "Geri", root_path, class: "btn btn-warning" %>
+  </div>  
+</div>
+

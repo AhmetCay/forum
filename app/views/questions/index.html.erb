@@ -1,0 +1,20 @@
+<ul class="list-group">
+  <% @questions.reverse_each do |question| %>
+    <li class="list-group-item">
+      <span class="badge">14</span>
+        <%= link_to question.title, question %>
+        <% if user_signed_in? && current_user == question.user %>
+        &nbsp;&nbsp;&nbsp;
+          <span class="duzenle"><i class="fa fa-pencil"></i> <%= link_to "Düzenle", edit_question_path(question), class: "duzenle" %> </span>&nbsp;
+          <span class="sil"><i class="fa fa-trash-o"></i> <%= link_to "Sil", question, method: :delete, data: {confirm: "Emin misin?"}, class: "sil" %></span>
+        <% end %> 
+        
+        <br><small class="help-block"><i class="fa fa-clock-o"></i> <%= link_to time_ago_in_words(question.created_at), question, style: "color:inherit; text-decoration:none;" %>&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i> <%= question.user.profile.full_name %></small>
+    </li>
+  <% end %>
+
+  <%= will_paginate @questions %>
+</ul>
+
+
+<%= link_to "Yeni Soru Sor", new_question_path, class: "btn btn-primary" if current_user%>
